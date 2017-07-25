@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/anarh/maze/badge.svg?branch=master)](https://coveralls.io/github/anarh/maze?branch=master)
+
 # maze
 Maze for fun
 
