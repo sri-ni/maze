@@ -13,15 +13,13 @@
     "maze"
   ],
   "dependencies": {
-    "http-server": "^0.10.0"
-  },
-  "devDependencies": {
+    "http-server": "^0.10.0",
+    "npm-run-all": "^1.5.1",
     "brfs": "^1.4.3",
     "browserify": "^13.0.0",
     "mocha": "^2.4.5",
     "node-sass": "^3.4.2",
-    "node-sass-import": "^1.0.0",
-    "npm-run-all": "^1.5.1",
+    "node-sass-import": "^1.0.0", 
     "sass-lint": "^1.4.0",
     "semistandard": "^7.0.5"
   },
