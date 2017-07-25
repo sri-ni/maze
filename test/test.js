@@ -85,4 +85,10 @@ describe('solutions', function () {
       assert.deepEqual([ 'up', 'up', 'left' ], solutions.getShortestPathDirections(solutions.getShortestPath(solutions.getSolutions(fixture))));
     });
   });
+
+  describe('#getShortestPathCells', function () {
+    it('should only 1 array of shortest path solution', function () {
+      assert.deepEqual([ [1, 1], [0, 1], [0, 0] ], solutions.getShortestPathCells(solutions.getShortestPath(solutions.getSolutions(fixture))));
+    });
+  });
 });
