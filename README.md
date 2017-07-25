@@ -8,12 +8,12 @@ Node v4+, npm v2+
 
 ## Run Command Line
 1. CLONE repo
-2. RUN `node index.js` - uses default example maze file or RUN `node index.js your-custom-maze-file.txt` - for your own custom file
+2. RUN `node index.js` *(uses default maze.txt file)* **or** RUN `node index.js your-custom-maze-file.txt` *(use your custom file)*
 
 ## Run in Browser
 1. CLONE repo
 2. RUN `npm install`
-3. RUN `npm run start:dev` or OPEN `/example/index.html` in your browser
+3. RUN `npm run start:dev` **or** OPEN `/example/index.html` in your browser
 
 
 ## Other Tasks
