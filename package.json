@@ -1,0 +1,41 @@
+{
+  "name": "maze",
+  "version": "0.0.0",
+  "description": "Maze for fun",
+  "author": "Emmanuel Addo Narh <eanarh@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anarh/maze.git"
+  },
+  "keywords": [
+    "maze"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "brfs": "^1.4.3",
+    "browserify": "^13.0.0",
+    "mocha": "^2.4.5",
+    "node-sass": "^3.4.2",
+    "node-sass-import": "^1.0.0",
+    "npm-run-all": "^1.5.1",
+    "sass-lint": "^1.4.0",
+    "semistandard": "^7.0.5"
+  },
+  "scripts": {
+    "start": "npm run test:watch",
+    "lint": "npm-run-all lint:*",
+    "lint:js": "semistandard",
+    "lint:css": "sass-lint 'example/**/*.scss' -v",
+    "test": "mocha",
+    "build": "npm-run-all build:js build:css",
+    "build:js": "npm-run-all build:js:*",
+    "build:js:example": "browserify -t brfs example/index.js > example/index.build.js",
+    "build:css": "npm-run-all build:css:*",
+    "build:css:example": "node-sass example/index.scss example/index.build.css --importer node_modules/node-sass-import",
+    "postversion": "git push --tags origin HEAD",
+    "prepublish": "npm-run-all lint test build",
+    "preversion": "npm-run-all lint test build && npm update --save"
+  }
+}

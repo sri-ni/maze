@@ -1,0 +1,69 @@
+$row-background-color: #fcfcfc;
+$row-border: 2px dotted #333;
+$start-background: rgba(174, 213, 129 , 1);
+$in-path-background: rgba(220, 237, 200 , .5);
+$is-end-background: rgba(255, 61, 0 , .6);
+$has-mine-background: rgba(176, 190, 197 , 1);
+$cell-height-width: 30px;
+
+body {
+  font-family: 'arial';
+}
+
+table {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+
+  td {
+    background-color: $row-background-color;
+    border: $row-border;
+    box-sizing: border-box;
+    display: table-cell;
+    height: $cell-height-width;
+    width: $cell-height-width;
+  }
+}
+
+.up {
+  border-top: 0;
+}
+
+.left {
+  border-left: 0;
+}
+
+.right {
+  border-right: 0;
+}
+
+.down {
+  border-bottom: 0;
+}
+
+.isStart {
+  background-color: $start-background;
+}
+
+.inPath {
+  background-color: $in-path-background;
+}
+
+.isEnd {
+  background-color: $is-end-background;
+}
+
+.hasMine{
+  &::after {
+    background-color: $has-mine-background;
+    border-radius: 20px;
+    content: ' ';
+    display: block;
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.hide {
+  display: none;
+}
