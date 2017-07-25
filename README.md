@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/anarh/maze/badge.svg?branch=master)](https://coveralls.io/github/anarh/maze?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/anarh/maze/badge.svg?branch=master)](https://coveralls.io/github/anarh/maze?branch=master) [![Build Status](https://travis-ci.org/anarh/maze.svg?branch=master)](https://travis-ci.org/anarh/maze)
 
 # maze
 Maze for fun
