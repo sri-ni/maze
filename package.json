@@ -35,6 +35,7 @@
     "build:css": "npm-run-all build:css:*",
     "build:css:example": "node-sass example/index.scss example/index.build.css --importer node_modules/node-sass-import",
     "postversion": "git push --tags origin HEAD",
+    "postinstall": "npm run build",
     "prepublish": "npm-run-all lint test build",
     "preversion": "npm-run-all lint test build && npm update --save"
   }
