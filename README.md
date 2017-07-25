@@ -14,3 +14,11 @@ Node v4+, npm v2+
 2. RUN `npm install`
 3. OPEN `/example/index.html` in your browser
 
+
+## Other Tasks
+
+### `npm test`
+Executes the tests located in `test/test.js`, powered by [mocha](https://mochajs.org/)
+
+### `npm run build`
+Builds the javascript and css outputs for the browser, powered by [browserify](http://browserify.org/) and [sass](https://github.com/sass/node-sass)
