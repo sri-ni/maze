@@ -6,12 +6,38 @@ $is-end-background: rgba(255, 61, 0 , .6);
 $has-mine-background: rgba(176, 190, 197 , 1);
 $cell-height-width: 30px;
 
+@mixin colors {
+  .isStart {
+    background-color: $start-background;
+  }
+
+  .inPath {
+    background-color: $in-path-background;
+  }
+
+  .isEnd {
+    background-color: $is-end-background;
+  }
+
+  .hasMine {
+    &::after {
+      background-color: $has-mine-background;
+      border-radius: 20px;
+      content: ' ';
+      display: block;
+      height: 30px;
+      width: 30px;
+    }
+  }
+}
+
 body {
   font-family: 'arial';
 }
 
-table {
+.maze {
   border-collapse: collapse;
+  margin-bottom: 30px;
   margin-left: auto;
   margin-right: auto;
 
@@ -23,44 +49,37 @@ table {
     height: $cell-height-width;
     width: $cell-height-width;
   }
+
+  @include colors;
+
+  .up {
+    border-top: 0;
+  }
+
+  .left {
+    border-left: 0;
+  }
+
+  .right {
+    border-right: 0;
+  }
+
+  .down {
+    border-bottom: 0;
+  }
 }
 
-.up {
-  border-top: 0;
+@include colors;
+
+.directions {
+  margin: 20px 0 10px;
 }
 
-.left {
-  border-left: 0;
-}
+.legend {
+  margin-bottom: 10px;
 
-.right {
-  border-right: 0;
-}
-
-.down {
-  border-bottom: 0;
-}
-
-.isStart {
-  background-color: $start-background;
-}
-
-.inPath {
-  background-color: $in-path-background;
-}
-
-.isEnd {
-  background-color: $is-end-background;
-}
-
-.hasMine {
-  &::after {
-    background-color: $has-mine-background;
-    border-radius: 20px;
-    content: ' ';
-    display: block;
-    height: 30px;
-    width: 30px;
+  td {
+    min-width: $cell-height-width;
   }
 }
 

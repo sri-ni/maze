@@ -19,7 +19,7 @@ var renderMaze = function (fileContents, mazeContainer) {
       var shortestPathCells = solutions.getShortestPathCells(shortestPath);
       var shortestPathDirections = solutions.getShortestPathDirections(shortestPath);
 
-      mazeContainer.innerHTML = mazeContainer.innerHTML + '<br><br>' + JSON.stringify(shortestPathDirections) + '<br><br>' + getMazeHTML.render(processedData.matrix);
+      mazeContainer.innerHTML = mazeContainer.innerHTML + '<div class="directions">' + JSON.stringify(shortestPathDirections) + '</div>' + getMazeHTML.render(processedData.matrix);
       getMazeHTML.showPath(shortestPathCells, mazeContainer.querySelectorAll('table')[i]);
 
       return shortestPathDirections;

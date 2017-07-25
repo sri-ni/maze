@@ -26,7 +26,7 @@ var getMazeHTML = function (mazeData) {
   mazeData.forEach(function (row) {
     rows.push(getRowHTML(row));
   });
-  return `<table>${rows.join('')}</table>`;
+  return `<table class="maze">${rows.join('')}</table>`;
 };
 
 var showPath = function (shortestPathCells, table) {

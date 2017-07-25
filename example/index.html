@@ -12,11 +12,22 @@
     <h1>Maze for fun</h1>
     </header>
     <main id="body">
+    <table class="legend">
+        <tr>
+          <td>Start: </td>
+          <td class="isStart"></td>
+          <td>End: </td>
+          <td class="isEnd"></td>
+          <td>Path: </td>
+          <td class="inPath"></td>
+          <td>Mine: </td>
+          <td class="hasMine"></td>
+        </tr>
+      </table>
       <div id="filesContainter">
         <label for="files">Select a maze file: </label>
         <input id="files" type="file" />
       </div>
-      
       <div id="mazeContainer"></div>
     </main>
     <script src="index.build.js"></script>

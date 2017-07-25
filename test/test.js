@@ -49,7 +49,7 @@ describe('getMazeHTML', function () {
 
   describe('#getTableHTML', function () {
     it('should return HTML for row data', function () {
-      assert.equal('<table><tr><td class=\"right isDeadEnd isEnd\"></td><td class=\"right down left\"></td><td class=\"down left\"></td></tr><tr><td class=\"right down\"></td><td class=\"up down left hasMine\"></td><td class=\"up down\"></td></tr><tr><td class=\"up isDeadEnd\"></td><td class=\"up right isStart\"></td><td class=\"up left\"></td></tr></table>', getMazeHTML.render(fixture.matrix));
+      assert.equal('<table class=\"maze\"><tr><td class=\"right isDeadEnd isEnd\"></td><td class=\"right down left\"></td><td class=\"down left\"></td></tr><tr><td class=\"right down\"></td><td class=\"up down left hasMine\"></td><td class=\"up down\"></td></tr><tr><td class=\"up isDeadEnd\"></td><td class=\"up right isStart\"></td><td class=\"up left\"></td></tr></table>', getMazeHTML.render(fixture.matrix));
     });
   });
 });
