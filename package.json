@@ -12,7 +12,9 @@
   "keywords": [
     "maze"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "http-server": "^0.10.0"
+  },
   "devDependencies": {
     "brfs": "^1.4.3",
     "browserify": "^13.0.0",
@@ -24,7 +26,8 @@
     "semistandard": "^7.0.5"
   },
   "scripts": {
-    "start": "npm run test:watch",
+    "start": "http-server ./example",
+    "start:dev": "http-server ./example -o -c-1",
     "lint": "npm-run-all lint:*",
     "lint:js": "semistandard",
     "lint:css": "sass-lint 'example/**/*.scss' -v",

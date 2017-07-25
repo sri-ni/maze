@@ -17,8 +17,13 @@ Node v4+, npm v2+
 
 ## Other Tasks
 
+### `npm start`
+Starts the static webserver which serves pages out of the /example directory, powered by [http-server](https://www.npmjs.com/package/http-server)
+
 ### `npm test`
 Executes the tests located in `test/test.js`, powered by [mocha](https://mochajs.org/)
 
 ### `npm run build`
 Builds the javascript and css outputs for the browser, powered by [browserify](http://browserify.org/) and [sass](https://github.com/sass/node-sass)
+
+## Live Demo

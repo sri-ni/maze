@@ -53,7 +53,7 @@ table {
   background-color: $is-end-background;
 }
 
-.hasMine{
+.hasMine {
   &::after {
     background-color: $has-mine-background;
     border-radius: 20px;
