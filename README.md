@@ -27,3 +27,4 @@ Executes the tests located in `test/test.js`, powered by [mocha](https://mochajs
 Builds the javascript and css outputs for the browser, powered by [browserify](http://browserify.org/) and [sass](https://github.com/sass/node-sass)
 
 ## Live Demo
+[https://mazeforfun.herokuapp.com/](https://mazeforfun.herokuapp.com/) powered by heroku.
