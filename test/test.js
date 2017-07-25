@@ -55,8 +55,16 @@ describe('getMazeHTML', function () {
 });
 
 describe('loadData', function () {
-  it('should return object { size: [], structure: []} for raw data', function () {
-    assert.equal('{"size":[3,3],"structure":[34,14,12,6,77,5,1,19,9]}', JSON.stringify(loadData('(3,3)-[34,14,12,6,77,5,1,19,9]')));
+  describe('#getSolutions', function () {
+    it('should return object { size: [], structure: []} for raw data', function () {
+      assert.equal('{"size":[3,3],"structure":[34,14,12,6,77,5,1,19,9]}', JSON.stringify(loadData('(3,3)-[34,14,12,6,77,5,1,19,9]')));
+    });
+  });
+
+  describe('#getSolutions', function () {
+    it('should return undefined for bad/empty raw data', function () {
+      assert.equal(undefined, JSON.stringify(loadData('')));
+    });
   });
 });
 
