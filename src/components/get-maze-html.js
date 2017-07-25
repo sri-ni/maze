@@ -37,5 +37,7 @@ var showPath = function (shortestPathCells, table) {
 
 module.exports = {
   render: getMazeHTML,
-  showPath: showPath
+  showPath: showPath,
+  getCellHTML: getCellHTML,
+  getRowHTML: getRowHTML
 };
