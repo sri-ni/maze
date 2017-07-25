@@ -8,13 +8,12 @@ Node v4+, npm v2+
 
 ## Run Command Line
 1. CLONE repo
-2. RUN `node index.js` - uses default example maze file
-3. or RUN `node index.js your-custom-maze-file.txt` - for your own custom file
+2. RUN `node index.js` - uses default example maze file or RUN `node index.js your-custom-maze-file.txt` - for your own custom file
 
 ## Run in Browser
 1. CLONE repo
 2. RUN `npm install`
-3. OPEN `/example/index.html` in your browser
+3. RUN `npm run start:dev` or OPEN `/example/index.html` in your browser
 
 
 ## Other Tasks
@@ -24,6 +23,9 @@ Starts the static webserver which serves pages out of the /example directory, po
 
 ### `npm test`
 Executes the tests located in `test/test.js`, powered by [mocha](https://mochajs.org/)
+
+### `npm cover`
+Executes the tests and creates a coverage report located in `./coverage`, powered by [coveralls](https://www.npmjs.com/package/coveralls)
 
 ### `npm run build`
 Builds the javascript and css outputs for the browser, powered by [browserify](http://browserify.org/) and [sass](https://github.com/sass/node-sass)
