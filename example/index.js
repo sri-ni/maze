@@ -8,6 +8,12 @@ var processData = require('../src/components/process-data');
 var solutions = require('../src/components/solutions');
 var getMazeHTML = require('../src/components/get-maze-html');
 
+/**
+ * { function_description }
+ *
+ * @param      {<type>}  fileContents   The file contents
+ * @param      {<type>}  mazeContainer  The maze container
+ */
 var renderMaze = function (fileContents, mazeContainer) {
   fileContents.split(/\r?\n/).forEach(function (line, i) {
     var loadedData = loadData(line.toString());
@@ -27,32 +33,43 @@ var renderMaze = function (fileContents, mazeContainer) {
   });
 };
 
+/**
+ * { function_description }
+ *
+ * @param      {<type>}  filesInput     The files input
+ * @param      {<type>}  mazeContainer  The maze container
+ */
+var processUploads = function (filesInput, mazeContainer) {
+  filesInput.addEventListener('change', function (event) {
+    var files = event.target.files;
+
+    if (!event.target.files) return;
+
+    mazeContainer.innerHTML = '';
+
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+
+      if (!file.type.match('plain')) continue;
+
+      var mazeReader = new FileReader(); // eslint-disable-line
+
+      mazeReader.addEventListener('load', function (event) {
+        var textFile = event.target;
+        renderMaze(textFile.result, mazeContainer);
+      });
+      mazeReader.readAsText(file);
+    }
+  });
+};
+
+/**
+ * { function_description }
+ */
 window.onload = function () {
   var mazeContainer = document.querySelector('#mazeContainer');
   var filesInputContainer = document.querySelector('#filesContainter');
   var filesInput = document.querySelector('#files');
-
-  var processUploads = function (filesInput, mazeContainer) {
-    filesInput.addEventListener('change', function (event) {
-      var files = event.target.files;
-
-      mazeContainer.innerHTML = '';
-
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-
-        if (!file.type.match('plain')) continue;
-
-        var mazeReader = new FileReader(); // eslint-disable-line
-
-        mazeReader.addEventListener('load', function (event) {
-          var textFile = event.target;
-          renderMaze(textFile.result, mazeContainer);
-        });
-        mazeReader.readAsText(file);
-      }
-    });
-  };
 
   if (window.File && window.FileList && window.FileReader) {
     processUploads(filesInput, mazeContainer);

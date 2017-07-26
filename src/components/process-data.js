@@ -2,6 +2,11 @@
 
 var getCell = require('./get-cell');
 
+/**
+ * { var_description }
+ *
+ * @type       {Object}
+ */
 var BIT_DETAILS = {
   'up': 1,
   'right': 2,
@@ -12,6 +17,11 @@ var BIT_DETAILS = {
   'mine': 64
 };
 
+/**
+ * { var_description }
+ *
+ * @type       {Object}
+ */
 var NEIGHBOR_RULES = {
   1: [-1, 0],
   2: [0, 1],
@@ -19,9 +29,18 @@ var NEIGHBOR_RULES = {
   8: [0, -1]
 };
 
-var getCellState = function (cellContent, cellXY, loadedData, processedData) {
+/**
+ * Sets the cell state.
+ *
+ * @param      {number}  cellBit        The cell bit
+ * @param      {Array}   cellXY         The cell xy
+ * @param      {Object}  loadedData     The loaded data
+ * @param      {Object}  processedData  The processed data
+ * @return     {Object}  The cell state.
+ */
+var setCellState = function (cellBit, cellXY, loadedData, processedData) {
   var cellState = {
-    cellNumber: getCell.number(cellXY, loadedData.size[0]),
+    cellNumber: getCell.index(cellXY, loadedData.size[0]),
     hasMine: false,
     isDeadEnd: false,
     isEnd: false,
@@ -36,7 +55,7 @@ var getCellState = function (cellContent, cellXY, loadedData, processedData) {
       direction: ''
     };
 
-    if ((cellContent & BIT_DETAILS[bit]) === BIT_DETAILS[bit]) {
+    if ((cellBit & BIT_DETAILS[bit]) === BIT_DETAILS[bit]) {
       cellState.hasMine = bit === 'mine';
 
       if (bit === 'start') {
@@ -51,7 +70,7 @@ var getCellState = function (cellContent, cellXY, loadedData, processedData) {
 
       if (NEIGHBOR_RULES[BIT_DETAILS[bit]]) {
         neighborData.cellXY = [NEIGHBOR_RULES[BIT_DETAILS[bit]][0] + cellXY[0], NEIGHBOR_RULES[BIT_DETAILS[bit]][1] + cellXY[1]];
-        neighborData.cellNumber = getCell.number(neighborData.cellXY, loadedData.size[0]);
+        neighborData.cellNumber = getCell.index(neighborData.cellXY, loadedData.size[0]);
         neighborData.direction = bit;
         cellState.neighbors.push(neighborData);
       }
@@ -62,6 +81,12 @@ var getCellState = function (cellContent, cellXY, loadedData, processedData) {
   return cellState;
 };
 
+/**
+ * { function_description }
+ *
+ * @param      {Object}  loadedData  The loaded data
+ * @return     {Object}  { description_of_the_return_value }
+ */
 var processData = function (loadedData) {
   var processedData = {
     matrix: [],
@@ -74,7 +99,7 @@ var processData = function (loadedData) {
     var row = [];
     while (row.length < loadedData.size[1]) {
       var cellXY = [processedData.matrix.length, row.length];
-      var cellState = getCellState(loadedData.structure.shift(), cellXY, loadedData, processedData);
+      var cellState = setCellState(loadedData.structure.shift(), cellXY, loadedData, processedData);
       row.push(cellState);
       if (cellState.isEnd || (!cellState.isDeadEnd && !cellState.isStart)) {
         processedData.openCells.push(cellState.cellNumber);

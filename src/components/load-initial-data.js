@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * { function_description }
+ *
+ * @param      {string}  line    The line
+ * @return     {Object}  { description_of_the_return_value }
+ */
 module.exports = function (line) {
   var data = {
     size: [],

@@ -2,8 +2,19 @@
 
 var getCell = require('./get-cell');
 
+/**
+ * { var_description }
+ *
+ * @type       {number}
+ */
 var NUMBER_OF_LIVES = 3;
 
+/**
+ * Gets the solutions.
+ *
+ * @param      {Object}  processedData  The processed data
+ * @return     {Array}  The solutions.
+ */
 var getSolutions = function (processedData) {
   var matrix = processedData.matrix;
   var startCell = processedData.startCell;
@@ -13,30 +24,67 @@ var getSolutions = function (processedData) {
   return getPath(matrix, [], [], startCell, endCell, null, openCells);
 };
 
+/**
+ * Gets the shortest path.
+ *
+ * @param      {Array}  solutions  The solutions
+ * @return     {Array}  The shortest path.
+ */
 var getShortestPath = function (solutions) {
   return solutions.sort(function (a, b) {
     return a.length - b.length;
   })[0];
 };
 
+/**
+ * Gets the shortest path directions.
+ *
+ * @param      {Array}  shortestPath  The shortest path
+ * @return     {Array}  The shortest path directions.
+ */
 var getShortestPathDirections = function (shortestPath) {
   return shortestPath.map(function (path) {
     return path.direction;
   });
 };
 
+/**
+ * Gets the shortest path cells.
+ *
+ * @param      {Array}  shortestPath  The shortest path
+ * @return     {Array}  The shortest path cells.
+ */
 var getShortestPathCells = function (shortestPath) {
   return shortestPath.map(function (cell) {
     return cell.cellXY;
   });
 };
 
+/**
+ * Adds a cellto path.
+ *
+ * @param      {Array}  root     The root
+ * @param      {Object}  pathObj  The path object
+ * @return     {Array}   { description_of_the_return_value }
+ */
 var addCelltoPath = function (root, pathObj) {
-  var newRoot = root.map(function (r) { return r; }) || [];
+  var newRoot = root.map(function (r) { return r; });
   newRoot.push(pathObj);
   return newRoot;
 };
 
+/**
+ * Gets the path.
+ *
+ * @param      {Array}  matrix     The matrix
+ * @param      {Array}   paths      The paths
+ * @param      {Array}  rootPath   The root path
+ * @param      {Array}  startCell  The start cell
+ * @param      {Array}  endCell    The end cell
+ * @param      {number}  prevCell   The previous cell
+ * @param      {Array}  openCells  The open cells
+ * @return     {Array}   The path.
+ */
 var getPath = function (matrix, paths, rootPath, startCell, endCell, prevCell, openCells) {
   var startCellData = getCell.data(matrix, startCell);
   var endCellData = getCell.data(matrix, endCell);

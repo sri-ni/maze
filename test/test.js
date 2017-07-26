@@ -13,12 +13,12 @@ var solutions = require('../src/components/solutions');
 var fixture = require('./mazeFixture');
 
 describe('getCell', function () {
-  describe('#number', function () {
+  describe('#index', function () {
     it('should return 0 when the cellXY is [0, 0] regardless of maze size', function () {
-      assert.equal(0, getCell.number([0, 0], 0));
-      assert.equal(0, getCell.number([0, 0], 3));
-      assert.equal(0, getCell.number([0, 0], 10));
-      assert.equal(0, getCell.number([0, 0], 7));
+      assert.equal(0, getCell.index([0, 0], 0));
+      assert.equal(0, getCell.index([0, 0], 3));
+      assert.equal(0, getCell.index([0, 0], 10));
+      assert.equal(0, getCell.index([0, 0], 7));
     });
   });
 
