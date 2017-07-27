@@ -35,21 +35,21 @@ describe('getCell', function () {
 describe('getMazeHTML', function () {
   describe('#getCellHTML', function () {
     it('should return HTML for cell data', function () {
-      assert.equal('<td class=\"right isDeadEnd isEnd\"></td>', getMazeHTML.getCellHTML(fixture.matrix[0][0]));
-      assert.equal('<td class="up down left hasMine"></td>', getMazeHTML.getCellHTML(fixture.matrix[1][1]));
+      assert.equal('<td class=\"right is-dead-end is-end\"></td>', getMazeHTML.getCellHTML(fixture.matrix[0][0]));
+      assert.equal('<td class="up down left has-mine"></td>', getMazeHTML.getCellHTML(fixture.matrix[1][1]));
     });
   });
 
   describe('#getRowHTML', function () {
     it('should return HTML for row data', function () {
-      assert.equal('<tr><td class=\"right isDeadEnd isEnd\"></td><td class=\"right down left\"></td><td class=\"down left\"></td></tr>', getMazeHTML.getRowHTML(fixture.matrix[0]));
-      assert.equal('<tr><td class=\"right down\"></td><td class=\"up down left hasMine\"></td><td class=\"up down\"></td></tr>', getMazeHTML.getRowHTML(fixture.matrix[1]));
+      assert.equal('<tr><td class=\"right is-dead-end is-end\"></td><td class=\"right down left\"></td><td class=\"down left\"></td></tr>', getMazeHTML.getRowHTML(fixture.matrix[0]));
+      assert.equal('<tr><td class=\"right down\"></td><td class=\"up down left has-mine\"></td><td class=\"up down\"></td></tr>', getMazeHTML.getRowHTML(fixture.matrix[1]));
     });
   });
 
   describe('#getTableHTML', function () {
     it('should return HTML for row data', function () {
-      assert.equal('<table class=\"maze\"><tr><td class=\"right isDeadEnd isEnd\"></td><td class=\"right down left\"></td><td class=\"down left\"></td></tr><tr><td class=\"right down\"></td><td class=\"up down left hasMine\"></td><td class=\"up down\"></td></tr><tr><td class=\"up isDeadEnd\"></td><td class=\"up right isStart\"></td><td class=\"up left\"></td></tr></table>', getMazeHTML.render(fixture.matrix));
+      assert.equal('<table class=\"maze\"><tr><td class=\"right is-dead-end is-end\"></td><td class=\"right down left\"></td><td class=\"down left\"></td></tr><tr><td class=\"right down\"></td><td class=\"up down left has-mine\"></td><td class=\"up down\"></td></tr><tr><td class=\"up is-dead-end\"></td><td class=\"up right is-start\"></td><td class=\"up left\"></td></tr></table>', getMazeHTML.render(fixture.matrix));
     });
   });
 });
