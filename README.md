@@ -40,13 +40,12 @@ Single loop over parsed data structure to
 2. Collect cells that have more than 1 open side,
 3. Identify start and end cells,
 4. Identifty cells that are deadends, contain mines, etc,
-3. Collect valid neighbors of each cell based on bitwise data
+5. Collect valid neighbors of each cell based on bitwise data
 
 ### Use recursion to find valid paths
 1. Starting with the "start cell", collect valid neighbors into path towards "end cell".
 2. If the last cell in the array is the "end cell", that will signify a valid path.
-3. Filter and exclude paths with more than 2 mines
-4. Sort paths and pick the shortest - this is the shortest path.
+3. Sort paths and pick the shortest - this is the shortest path.
 
 
 ## Other Tasks

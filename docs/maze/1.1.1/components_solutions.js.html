@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>components/solutions.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addCelltoPath">addCelltoPath</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#BIT_DETAILS">BIT_DETAILS</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCellData">getCellData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCellHTML">getCellHTML</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCellIndex">getCellIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getMazeHTML">getMazeHTML</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getRowHTML">getRowHTML</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getShortestPath">getShortestPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getShortestPathCells">getShortestPathCells</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getShortestPathDirections">getShortestPathDirections</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getValidPaths">getValidPaths</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NEIGHBOR_RULES">NEIGHBOR_RULES</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NUMBER_OF_LIVES">NUMBER_OF_LIVES</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#processData">processData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#processMazeDefinitions">processMazeDefinitions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setCellState">setCellState</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#showPath">showPath</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/solutions.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+var getCell = require('./get-cell');
+
+/**
+ * Number of lives available while navigating over mines. A life is lost when the character goes over a mine.
+ *
+ * @type       {number}
+ */
+var NUMBER_OF_LIVES = 2;
+
+/**
+ * Gets the valid paths.
+ *
+ * @param      {Object}   processedData  The processed data
+ * @return     {Array}    Valid paths as arrays.
+ */
+var getValidPaths = function (processedData) {
+  var matrix = processedData.matrix;
+  var startCell = processedData.startCell;
+  var endCell = processedData.endCell;
+  var openCells = processedData.openCells;
+
+  return getPath(matrix, [], [], startCell, endCell, null, openCells);
+};
+
+/**
+ * Gets the shortest valid path.
+ *
+ * @param      {Array}  validPaths  The valid paths
+ * @return     {Array}  The shortest path.
+ */
+var getShortestPath = function (validPaths) {
+  return validPaths.sort(function (a, b) {
+    return a.length - b.length;
+  })[0];
+};
+
+/**
+ * Gets the shortest path directions.
+ *
+ * @param      {Array}  shortestPath  The shortest path
+ * @return     {Array}  The shortest path directions.
+ */
+var getShortestPathDirections = function (shortestPath) {
+  return shortestPath.map(function (path) {
+    return path.direction;
+  });
+};
+
+/**
+ * Gets shortest path array with cellXYs.
+ *
+ * @param      {Array}  shortestPath  The shortest path
+ * @return     {Array}  The shortest path cell data.
+ */
+var getShortestPathCells = function (shortestPath) {
+  return shortestPath.map(function (cell) {
+    return cell.cellXY;
+  });
+};
+
+/**
+ * Adds a cell to path.
+ *
+ * @param      {Array}    root     The root path
+ * @param      {Object}   pathObj  The path object
+ * @return     {Array}    New root path with added cell
+ */
+var addCelltoPath = function (root, pathObj) {
+  var newRoot = root.map(function (r) { return r; });
+  newRoot.push(pathObj);
+  return newRoot;
+};
+
+/**
+ * Gets the path.
+ * A recursive function that finds valid paths from start cell to end cell
+ *
+ * @param      {Array}    matrix     The matrix of the maze
+ * @param      {Array}    paths      The paths
+ * @param      {Array}    rootPath   The root path
+ * @param      {Array}    startCell  The coordinates of the start cell
+ * @param      {Array}    endCell    The end cell
+ * @param      {number}   prevCell   The previous cell
+ * @param      {Array}    openCells  Open cells are a list of viable cells that can make a valid path
+ * @return     {Array}    The path as an array of cells.
+ */
+var getPath = function (matrix, paths, rootPath, startCell, endCell, prevCell, openCells) {
+  var startCellData = getCell.data(matrix, startCell);
+  var endCellData = getCell.data(matrix, endCell);
+  var availableCells = openCells.map(function (cell) { return cell; });
+  var neighbors = startCellData.neighbors.filter(function (n) {
+    return n.cellNumber !== prevCell;
+  });
+
+  neighbors.forEach(function (neighbor) {
+    var pathObj = {
+      direction: neighbor.direction,
+      cellNumber: neighbor.cellNumber,
+      cellXY: neighbor.cellXY,
+      hasMine: getCell.data(matrix, neighbor.cellXY).hasMine
+    };
+    var newRootPath = addCelltoPath(rootPath, pathObj);
+    var hasEndCell = newRootPath[newRootPath.length - 1].cellNumber === endCellData.cellNumber;
+    var neighborIndex = availableCells.indexOf(neighbor.cellNumber);
+    var mines = newRootPath.filter(function (path) {
+      return path.hasMine === true;
+    });
+
+    availableCells.splice(neighborIndex, 1);
+
+    if (hasEndCell &amp;&amp; mines.length &lt;= NUMBER_OF_LIVES) {
+      paths.push(newRootPath);
+    } else {
+      if (neighborIndex !== -1) {
+        getPath(matrix, paths, newRootPath, neighbor.cellXY, endCell, startCellData.cellNumber, availableCells);
+      }
+    }
+  });
+
+  return paths;
+};
+
+module.exports = {
+  getValidPaths: getValidPaths,
+  getShortestPath: getShortestPath,
+  getShortestPathDirections: getShortestPathDirections,
+  getShortestPathCells: getShortestPathCells
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Thu Jul 27 2017 11:37:54 GMT-0500 (CDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
