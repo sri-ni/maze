@@ -7,19 +7,19 @@ $has-mine-background: rgba(176, 190, 197 , 1);
 $cell-height-width: 30px;
 
 @mixin colors {
-  .isStart {
+  .is-start {
     background-color: $start-background;
   }
 
-  .inPath {
+  .in-path {
     background-color: $in-path-background;
   }
 
-  .isEnd {
+  .is-end {
     background-color: $is-end-background;
   }
 
-  .hasMine {
+  .has-mine {
     &::after {
       background-color: $has-mine-background;
       border-radius: 20px;

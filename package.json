@@ -21,7 +21,8 @@
     "node-sass-import": "^1.0.0",
     "npm-run-all": "^1.5.1",
     "sass-lint": "^1.4.0",
-    "semistandard": "^7.0.5"
+    "semistandard": "^7.0.5",
+    "to-case": "^2.0.0"
   },
   "scripts": {
     "start": "http-server ./example",

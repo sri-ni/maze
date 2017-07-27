@@ -1,5 +1,7 @@
 'use strict';
 
+var to = require('to-case');
+
 /**
  * Gets the cell html.
  *
@@ -13,7 +15,7 @@ var getCellHTML = function (cellData) {
 
   for (let prop in cellData) {
     if (cellData[prop] === true) {
-      classes.push(prop);
+      classes.push(to.slug(prop));
     }
   }
   return `<td class="${classes.join(' ')}"></td>`;
@@ -55,7 +57,7 @@ var getMazeHTML = function (mazeData) {
  */
 var showPath = function (shortestPathCells, table) {
   shortestPathCells.forEach(function (cell) {
-    table.rows[cell[0]].cells[cell[1]].classList.add('inPath');
+    table.rows[cell[0]].cells[cell[1]].classList.add('in-path');
   });
 };
 
