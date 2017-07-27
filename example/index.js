@@ -9,10 +9,10 @@ var solutions = require('../src/components/solutions');
 var getMazeHTML = require('../src/components/get-maze-html');
 
 /**
- * { function_description }
+ * Renders maze html
  *
- * @param      {<type>}  fileContents   The file contents
- * @param      {<type>}  mazeContainer  The maze container
+ * @param      {string}  fileContents   The file contents
+ * @param      {Object}  mazeContainer  The maze container
  */
 var renderMaze = function (fileContents, mazeContainer) {
   fileContents.split(/\r?\n/).forEach(function (line, i) {
@@ -20,7 +20,7 @@ var renderMaze = function (fileContents, mazeContainer) {
 
     if (loadedData) {
       var processedData = processData(loadedData);
-      var paths = solutions.getSolutions(processedData);
+      var paths = solutions.getValidPaths(processedData);
       var shortestPath = solutions.getShortestPath(paths);
       var shortestPathCells = solutions.getShortestPathCells(shortestPath);
       var shortestPathDirections = solutions.getShortestPathDirections(shortestPath);
@@ -34,10 +34,10 @@ var renderMaze = function (fileContents, mazeContainer) {
 };
 
 /**
- * { function_description }
+ * Processes maze text file uploads initiated from the browser
  *
- * @param      {<type>}  filesInput     The files input
- * @param      {<type>}  mazeContainer  The maze container
+ * @param      {string}  filesInput     The files input
+ * @param      {Object}  mazeContainer  The maze container
  */
 var processUploads = function (filesInput, mazeContainer) {
   filesInput.addEventListener('change', function (event) {
@@ -64,7 +64,7 @@ var processUploads = function (filesInput, mazeContainer) {
 };
 
 /**
- * { function_description }
+ * Starting function for the browser
  */
 window.onload = function () {
   var mazeContainer = document.querySelector('#mazeContainer');

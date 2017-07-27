@@ -3,7 +3,7 @@
 var getCell = require('./get-cell');
 
 /**
- * { var_description }
+ * Lookup for bitwise description for cell content.
  *
  * @type       {Object}
  */
@@ -18,7 +18,8 @@ var BIT_DETAILS = {
 };
 
 /**
- * { var_description }
+ * Lookup for XY coordinates for neighbors of a cell.
+ * up, down, right, left
  *
  * @type       {Object}
  */
@@ -33,10 +34,10 @@ var NEIGHBOR_RULES = {
  * Sets the cell state.
  *
  * @param      {number}  cellBit        The cell bit
- * @param      {Array}   cellXY         The cell xy
+ * @param      {Array}   cellXY         The cell xy coordinates
  * @param      {Object}  loadedData     The loaded data
  * @param      {Object}  processedData  The processed data
- * @return     {Object}  The cell state.
+ * @return     {Object}  The cell state contains data to describe the cells contents and it's valid neighbors.
  */
 var setCellState = function (cellBit, cellXY, loadedData, processedData) {
   var cellState = {
@@ -82,10 +83,12 @@ var setCellState = function (cellBit, cellXY, loadedData, processedData) {
 };
 
 /**
- * { function_description }
+ * Takes the raw data and processes it into an object that describes
+ * a 2X2 matrix view of the maze, the start cell, end cell, and open cells
+ * that can form a path.
  *
  * @param      {Object}  loadedData  The loaded data
- * @return     {Object}  { description_of_the_return_value }
+ * @return     {Object}  Processed data
  */
 var processData = function (loadedData) {
   var processedData = {

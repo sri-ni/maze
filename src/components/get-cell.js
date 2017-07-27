@@ -12,7 +12,8 @@ var getCellIndex = function (cellXY, mazeWidth) {
 };
 
 /**
- * { function_description }
+ * Returns data for each cell by looking up the matrix with the XY coordinates
+ * of the cell
  *
  * @param      {Array}  matrix  The matrix
  * @param      {Array}  cellXY  The cell xy

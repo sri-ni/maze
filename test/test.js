@@ -3,6 +3,7 @@
 'use strict';
 
 var assert = require('assert');
+var htmlParser = require('html-dom-parser');
 
 var getCell = require('../src/components/get-cell');
 var getMazeHTML = require('../src/components/get-maze-html');
@@ -55,13 +56,13 @@ describe('getMazeHTML', function () {
 });
 
 describe('loadData', function () {
-  describe('#getSolutions', function () {
+  describe('#getData', function () {
     it('should return object { size: [], structure: []} for raw data', function () {
       assert.equal('{"size":[3,3],"structure":[34,14,12,6,77,5,1,19,9]}', JSON.stringify(loadData('(3,3)-[34,14,12,6,77,5,1,19,9]')));
     });
   });
 
-  describe('#getSolutions', function () {
+  describe('#getData', function () {
     it('should return undefined for bad/empty raw data', function () {
       assert.equal(undefined, JSON.stringify(loadData('')));
     });
@@ -75,28 +76,28 @@ describe('processData', function () {
 });
 
 describe('solutions', function () {
-  describe('#getSolutions', function () {
-    it('should return an array of solutions for maze', function () {
-      assert.ok(solutions.getSolutions(fixture));
-      assert.equal(2, solutions.getSolutions(fixture).length);
+  describe('#getValidPaths', function () {
+    it('should return an array of valid paths for maze', function () {
+      assert.ok(solutions.getValidPaths(fixture));
+      assert.equal(2, solutions.getValidPaths(fixture).length);
     });
   });
 
   describe('#getShortestPath', function () {
-    it('should only 1 array of shortest path solution', function () {
-      assert.ok(solutions.getShortestPath(solutions.getSolutions(fixture)));
+    it('should return only 1 array of shortest valid path', function () {
+      assert.ok(solutions.getShortestPath(solutions.getValidPaths(fixture)));
     });
   });
 
-  describe('#getShortestPath', function () {
-    it('should only 1 array of shortest path solution', function () {
-      assert.deepEqual([ 'up', 'up', 'left' ], solutions.getShortestPathDirections(solutions.getShortestPath(solutions.getSolutions(fixture))));
+  describe('#getShortestPathDirections', function () {
+    it('should return only 1 array of shortest valid path directions', function () {
+      assert.deepEqual([ 'up', 'up', 'left' ], solutions.getShortestPathDirections(solutions.getShortestPath(solutions.getValidPaths(fixture))));
     });
   });
 
   describe('#getShortestPathCells', function () {
-    it('should only 1 array of shortest path solution', function () {
-      assert.deepEqual([ [1, 1], [0, 1], [0, 0] ], solutions.getShortestPathCells(solutions.getShortestPath(solutions.getSolutions(fixture))));
+    it('should return only 1 array of shortest valid path containing cellXYs', function () {
+      assert.deepEqual([ [1, 1], [0, 1], [0, 0] ], solutions.getShortestPathCells(solutions.getShortestPath(solutions.getValidPaths(fixture))));
     });
   });
 });

@@ -26,7 +26,7 @@ var processMazeDefinitions = function (filename) {
 
       if (loadedData) {
         var processedData = processData(loadedData);
-        var paths = findSolutions.getSolutions(processedData);
+        var paths = findSolutions.getValidPaths(processedData);
         var shortestPath = findSolutions.getShortestPath(paths);
         var shortestPathDirections = findSolutions.getShortestPathDirections(shortestPath);
         solutions.push(shortestPathDirections);

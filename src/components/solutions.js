@@ -3,19 +3,19 @@
 var getCell = require('./get-cell');
 
 /**
- * { var_description }
+ * Number of lives available while navigating over mines. A life is lost when the character goes over a mine.
  *
  * @type       {number}
  */
-var NUMBER_OF_LIVES = 3;
+var NUMBER_OF_LIVES = 2;
 
 /**
- * Gets the solutions.
+ * Gets the valid paths.
  *
- * @param      {Object}  processedData  The processed data
- * @return     {Array}  The solutions.
+ * @param      {Object}   processedData  The processed data
+ * @return     {Array}    Valid paths as arrays.
  */
-var getSolutions = function (processedData) {
+var getValidPaths = function (processedData) {
   var matrix = processedData.matrix;
   var startCell = processedData.startCell;
   var endCell = processedData.endCell;
@@ -25,13 +25,13 @@ var getSolutions = function (processedData) {
 };
 
 /**
- * Gets the shortest path.
+ * Gets the shortest valid path.
  *
- * @param      {Array}  solutions  The solutions
+ * @param      {Array}  validPaths  The valid paths
  * @return     {Array}  The shortest path.
  */
-var getShortestPath = function (solutions) {
-  return solutions.sort(function (a, b) {
+var getShortestPath = function (validPaths) {
+  return validPaths.sort(function (a, b) {
     return a.length - b.length;
   })[0];
 };
@@ -49,10 +49,10 @@ var getShortestPathDirections = function (shortestPath) {
 };
 
 /**
- * Gets the shortest path cells.
+ * Gets shortest path array with cellXYs.
  *
  * @param      {Array}  shortestPath  The shortest path
- * @return     {Array}  The shortest path cells.
+ * @return     {Array}  The shortest path cell data.
  */
 var getShortestPathCells = function (shortestPath) {
   return shortestPath.map(function (cell) {
@@ -61,11 +61,11 @@ var getShortestPathCells = function (shortestPath) {
 };
 
 /**
- * Adds a cellto path.
+ * Adds a cell to path.
  *
- * @param      {Array}  root     The root
- * @param      {Object}  pathObj  The path object
- * @return     {Array}   { description_of_the_return_value }
+ * @param      {Array}    root     The root path
+ * @param      {Object}   pathObj  The path object
+ * @return     {Array}    New root path with added cell
  */
 var addCelltoPath = function (root, pathObj) {
   var newRoot = root.map(function (r) { return r; });
@@ -75,15 +75,16 @@ var addCelltoPath = function (root, pathObj) {
 
 /**
  * Gets the path.
+ * A recursive function that finds valid paths from start cell to end cell
  *
- * @param      {Array}  matrix     The matrix
- * @param      {Array}   paths      The paths
- * @param      {Array}  rootPath   The root path
- * @param      {Array}  startCell  The start cell
- * @param      {Array}  endCell    The end cell
- * @param      {number}  prevCell   The previous cell
- * @param      {Array}  openCells  The open cells
- * @return     {Array}   The path.
+ * @param      {Array}    matrix     The matrix of the maze
+ * @param      {Array}    paths      The paths
+ * @param      {Array}    rootPath   The root path
+ * @param      {Array}    startCell  The coordinates of the start cell
+ * @param      {Array}    endCell    The end cell
+ * @param      {number}   prevCell   The previous cell
+ * @param      {Array}    openCells  Open cells are a list of viable cells that can make a valid path
+ * @return     {Array}    The path as an array of cells.
  */
 var getPath = function (matrix, paths, rootPath, startCell, endCell, prevCell, openCells) {
   var startCellData = getCell.data(matrix, startCell);
@@ -109,7 +110,7 @@ var getPath = function (matrix, paths, rootPath, startCell, endCell, prevCell, o
 
     availableCells.splice(neighborIndex, 1);
 
-    if (hasEndCell && mines.length < NUMBER_OF_LIVES) {
+    if (hasEndCell && mines.length <= NUMBER_OF_LIVES) {
       paths.push(newRootPath);
     } else {
       if (neighborIndex !== -1) {
@@ -122,7 +123,7 @@ var getPath = function (matrix, paths, rootPath, startCell, endCell, prevCell, o
 };
 
 module.exports = {
-  getSolutions: getSolutions,
+  getValidPaths: getValidPaths,
   getShortestPath: getShortestPath,
   getShortestPathDirections: getShortestPathDirections,
   getShortestPathCells: getShortestPathCells
