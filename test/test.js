@@ -3,7 +3,6 @@
 'use strict';
 
 var assert = require('assert');
-var htmlParser = require('html-dom-parser');
 
 var getCell = require('../src/components/get-cell');
 var getMazeHTML = require('../src/components/get-maze-html');
