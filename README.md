@@ -87,7 +87,7 @@ Executes the tests located in `test/test.js`, powered by [mocha](https://mochajs
 Builds the javascript and css outputs for the browser, powered by [browserify](http://browserify.org/) and [sass](https://github.com/sass/node-sass)
 
 ### `npm run docs`
-Generates html documentation of the code with [jsdoc](http://usejsdoc.org/) and [sass](https://github.com/sass/node-sass)
+Generates html documentation of the code with [jsdoc](http://usejsdoc.org/)
 
 ### `npm run cover`
 Executes the tests and creates a coverage report located in `./coverage`, powered by [coveralls](https://www.npmjs.com/package/coveralls)
