@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>components/process-data.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addCelltoPath">addCelltoPath</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#BIT_DETAILS">BIT_DETAILS</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCellData">getCellData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCellHTML">getCellHTML</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCellIndex">getCellIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getMazeHTML">getMazeHTML</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getRowHTML">getRowHTML</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getShortestPath">getShortestPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getShortestPathCells">getShortestPathCells</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getShortestPathDirections">getShortestPathDirections</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getValidPaths">getValidPaths</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NEIGHBOR_RULES">NEIGHBOR_RULES</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NUMBER_OF_LIVES">NUMBER_OF_LIVES</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#processData">processData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#processMazeDefinitions">processMazeDefinitions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setCellState">setCellState</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#showPath">showPath</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/process-data.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+var getCell = require('./get-cell');
+
+/**
+ * Lookup for bitwise description for cell content.
+ *
+ * @type       {Object}
+ */
+var BIT_DETAILS = {
+  'up': 1,
+  'right': 2,
+  'down': 4,
+  'left': 8,
+  'start': 16,
+  'end': 32,
+  'mine': 64
+};
+
+/**
+ * Lookup for XY coordinates for neighbors of a cell.
+ * up, down, right, left
+ *
+ * @type       {Object}
+ */
+var NEIGHBOR_RULES = {
+  1: [-1, 0],
+  2: [0, 1],
+  4: [1, 0],
+  8: [0, -1]
+};
+
+/**
+ * Sets the cell state.
+ *
+ * @param      {number}  cellBit        The cell bit
+ * @param      {Array}   cellXY         The cell xy coordinates
+ * @param      {Object}  loadedData     The loaded data
+ * @param      {Object}  processedData  The processed data
+ * @return     {Object}  The cell state contains data to describe the cells contents and it's valid neighbors.
+ */
+var setCellState = function (cellBit, cellXY, loadedData, processedData) {
+  var cellState = {
+    cellNumber: getCell.index(cellXY, loadedData.size[0]),
+    hasMine: false,
+    isDeadEnd: false,
+    isEnd: false,
+    isStart: false,
+    neighbors: []
+  };
+
+  for (var bit in BIT_DETAILS) {
+    var neighborData = {
+      cellNumber: null,
+      cellXY: [],
+      direction: ''
+    };
+
+    if ((cellBit &amp; BIT_DETAILS[bit]) === BIT_DETAILS[bit]) {
+      cellState.hasMine = bit === 'mine';
+
+      if (bit === 'start') {
+        cellState.isStart = bit === 'start';
+        processedData.startCell = cellXY;
+      }
+
+      if (bit === 'end') {
+        cellState.isEnd = bit === 'end';
+        processedData.endCell = cellXY;
+      }
+
+      if (NEIGHBOR_RULES[BIT_DETAILS[bit]]) {
+        neighborData.cellXY = [NEIGHBOR_RULES[BIT_DETAILS[bit]][0] + cellXY[0], NEIGHBOR_RULES[BIT_DETAILS[bit]][1] + cellXY[1]];
+        neighborData.cellNumber = getCell.index(neighborData.cellXY, loadedData.size[0]);
+        neighborData.direction = bit;
+        cellState.neighbors.push(neighborData);
+      }
+    }
+  }
+
+  cellState.isDeadEnd = cellState.neighbors.length === 1;
+  return cellState;
+};
+
+/**
+ * Takes the raw data and processes it into an object that describes
+ * a 2X2 matrix view of the maze, the start cell, end cell, and open cells
+ * that can form a path.
+ *
+ * @param      {Object}  loadedData  The loaded data
+ * @return     {Object}  Processed data
+ */
+var processData = function (loadedData) {
+  var processedData = {
+    matrix: [],
+    startCell: [],
+    endCell: [],
+    openCells: []
+  };
+
+  while (processedData.matrix.length &lt; loadedData.size[0]) {
+    var row = [];
+    while (row.length &lt; loadedData.size[1]) {
+      var cellXY = [processedData.matrix.length, row.length];
+      var cellState = setCellState(loadedData.structure.shift(), cellXY, loadedData, processedData);
+      row.push(cellState);
+      if (cellState.isEnd || (!cellState.isDeadEnd &amp;&amp; !cellState.isStart)) {
+        processedData.openCells.push(cellState.cellNumber);
+      }
+    }
+    processedData.matrix.push(row);
+  }
+
+  return processedData;
+};
+
+module.exports = processData;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 30 2017 09:28:02 GMT-0800 (PST) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
