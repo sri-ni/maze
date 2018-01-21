@@ -56,7 +56,8 @@
     "ignore": [
       "/docs/",
       "/coverage/",
-      "/example"
+      "*build.js",
+      "*build.css"
     ]
   },
   "dependencies": {

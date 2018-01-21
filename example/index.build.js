@@ -631,7 +631,7 @@ function toTitleCase(string) {
  * @param      {number}  mazeWidth  The width of the maze
  * @return     {number}  { the nominal index of the cell in the maze }
  */
-var getCellIndex = function (cellXY, mazeWidth) {
+const getCellIndex = function (cellXY, mazeWidth) {
   return (cellXY[0] * mazeWidth) + cellXY[1];
 };
 
@@ -643,7 +643,7 @@ var getCellIndex = function (cellXY, mazeWidth) {
  * @param      {Array}  cellXY  The cell xy
  * @return     {Object}  { description_of_the_return_value }
  */
-var getCellData = function (matrix, cellXY) {
+const getCellData = function (matrix, cellXY) {
   return matrix[cellXY[0]][cellXY[1]];
 };
 
@@ -750,14 +750,14 @@ module.exports = function (line) {
 },{}],20:[function(require,module,exports){
 'use strict';
 
-var getCell = require('./get-cell');
+const getCell = require('./get-cell');
 
 /**
  * Lookup for bitwise description for cell content.
  *
  * @type       {Object}
  */
-var BIT_DETAILS = {
+const BIT_DETAILS = {
   'up': 1,
   'right': 2,
   'down': 4,
@@ -773,7 +773,7 @@ var BIT_DETAILS = {
  *
  * @type       {Object}
  */
-var NEIGHBOR_RULES = {
+const NEIGHBOR_RULES = {
   1: [-1, 0],
   2: [0, 1],
   4: [1, 0],
