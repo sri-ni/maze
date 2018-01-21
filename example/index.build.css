@@ -1,0 +1,64 @@
+body {
+  font-family: 'arial'; }
+
+.maze {
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto; }
+  .maze td {
+    background-color: #fcfcfc;
+    border: 2px dotted #333;
+    box-sizing: border-box;
+    display: table-cell;
+    height: 30px;
+    width: 30px; }
+  .maze .is-start {
+    background-color: #aed581; }
+  .maze .in-path {
+    background-color: rgba(220, 237, 200, 0.5); }
+  .maze .is-end {
+    background-color: rgba(255, 61, 0, 0.6); }
+  .maze .has-mine::after {
+    background-color: #b0bec5;
+    border-radius: 20px;
+    content: ' ';
+    display: block;
+    height: 30px;
+    width: 30px; }
+  .maze .up {
+    border-top: 0; }
+  .maze .left {
+    border-left: 0; }
+  .maze .right {
+    border-right: 0; }
+  .maze .down {
+    border-bottom: 0; }
+
+.is-start {
+  background-color: #aed581; }
+
+.in-path {
+  background-color: rgba(220, 237, 200, 0.5); }
+
+.is-end {
+  background-color: rgba(255, 61, 0, 0.6); }
+
+.has-mine::after {
+  background-color: #b0bec5;
+  border-radius: 20px;
+  content: ' ';
+  display: block;
+  height: 30px;
+  width: 30px; }
+
+.directions {
+  margin: 20px 0 10px; }
+
+.legend {
+  margin-bottom: 10px; }
+  .legend td {
+    min-width: 30px; }
+
+.hide {
+  display: none; }

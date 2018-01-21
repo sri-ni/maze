@@ -40,7 +40,6 @@
     "brfs": "1.4.3",
     "browserify": "15.2.0",
     "coveralls": "3.0.0",
-    "http-server": "0.11.1",
     "husky": "0.14.3",
     "istanbul": "0.4.5",
     "jsdoc": "3.5.5",
@@ -61,5 +60,7 @@
       "/coverage/"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "http-server": "0.11.1"
+  }
 }
