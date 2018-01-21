@@ -28,11 +28,9 @@
     "build:css": "npm-run-all build:css:*",
     "build:css:example": "node-sass example/index.scss example/index.build.css --importer node_modules/node-sass-import",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "postversion": "git push --tags origin HEAD",
-    "postinstall": "npm run build",
+    "prestart:dev": "npm run build",
     "release": "standard-version",
-    "prepublish": "npm-run-all lint test build",
-    "preversion": "npm-run-all lint test build docs && npm update --save"
+    "precommit": "npm-run-all lint test build"
   },
   "devDependencies": {
     "@commitlint/cli": "6.0.2",
@@ -57,7 +55,8 @@
   "semistandard": {
     "ignore": [
       "/docs/",
-      "/coverage/"
+      "/coverage/",
+      "/example"
     ]
   },
   "dependencies": {
