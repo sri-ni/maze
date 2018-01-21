@@ -1,13 +1,13 @@
 'use strict';
 
-var getCell = require('./get-cell');
+const getCell = require('./get-cell');
 
 /**
  * Lookup for bitwise description for cell content.
  *
  * @type       {Object}
  */
-var BIT_DETAILS = {
+const BIT_DETAILS = {
   'up': 1,
   'right': 2,
   'down': 4,
@@ -23,7 +23,7 @@ var BIT_DETAILS = {
  *
  * @type       {Object}
  */
-var NEIGHBOR_RULES = {
+const NEIGHBOR_RULES = {
   1: [-1, 0],
   2: [0, 1],
   4: [1, 0],
