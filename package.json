@@ -27,10 +27,8 @@
     "build:js:example": "browserify -t brfs example/index.js > example/index.build.js",
     "build:css": "npm-run-all build:css:*",
     "build:css:example": "node-sass example/index.scss example/index.build.css --importer node_modules/node-sass-import",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
     "prestart:dev": "npm run build",
-    "release": "standard-version",
-    "precommit": "npm-run-all lint test build"
+    "release": "standard-version"
   },
   "devDependencies": {
     "@commitlint/cli": "6.0.2",
