@@ -12,7 +12,8 @@
     <h1>Maze for fun</h1>
     </header>
     <main id="body">
-    <table class="legend">
+      <h1><a href="https://mazeforfun.herokuapp.com/vds-react/">React</h1>
+      <table class="legend" hidden>
         <tr>
           <td>Start: </td>
           <td class="is-start"></td>
@@ -24,11 +25,11 @@
           <td class="has-mine"></td>
         </tr>
       </table>
-      <div id="filesContainter">
+      <div id="filesContainter" hidden>
         <label for="files">Select a maze file: </label>
         <input id="files" type="file" />
       </div>
-      <div id="mazeContainer"></div>
+      <div id="mazeContainer" hidden></div>
     </main>
     <script src="index.build.js"></script>
   </body>
