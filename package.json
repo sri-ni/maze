@@ -59,6 +59,10 @@
       "*build.css"
     ]
   },
+  "engines": {
+    "node": "8.16.1",
+    "npm": "6.4.1"
+  },
   "dependencies": {
     "http-server": "0.11.1"
   }
